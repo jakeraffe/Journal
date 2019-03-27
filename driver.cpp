@@ -6,7 +6,11 @@
 #include <stdlib.h>
 
 //Creates a new entry object and adds it to the Entry vector in Journal.
-//TODO: figure out how getline can work with this or if we cant use it..
+/*TODO: 
+    1. Figure out how getline can work with this or if we cant use it..
+    2. Dont know why this works... It shouldnt let me push_back multiple objects of the same name. Could be part of the problem
+    3. Maybe related to above, search doesn not find the added entry and I cannot read its contents in read_Entry. Says the title is not found..
+*/  
 void new_Entry(Journal &journal){
     Entry entry;
     string title;
@@ -17,15 +21,23 @@ void new_Entry(Journal &journal){
     cout << "Please end your inputs with a semicolon."<< endl << endl;
 
     cout << "Entry Title: ";
-    getline(cin, title, ';');
-    entry.Title = title;
+    cin >> title;
+    if (title == "quit"){
+        cout << "Journal entry cannot be named this. Please try again." << endl;
+        new_Entry(journal);
+    }
+    else{
+        entry.Title = title;
+    }
 
     cout << "Date logged: ";
-    getline(cin, date, ';');
+    // getline(cin, date, ';');
+    cin >> date;
     entry.Date = date;
 
     cout << "Time logged: ";
-    getline(cin, time, ';');
+    // getline(cin, time, ';');
+    cin >> time;
     entry.Time = time;
 
     cout << "Enter your input please:" << endl;
@@ -41,6 +53,10 @@ void new_Entry(Journal &journal){
 
 }
 
+//
+//I wanted to loop over the journal entries and display the title, date, and time multiple times so I just 
+    //made a function instead of copying and pasting.
+//It does takes a Journal object and loops over the entries in that journal using a range based loop.
 void journalEntries(Journal &journal){
     //lets me number the entries
     int i = 0;
@@ -52,7 +68,13 @@ void journalEntries(Journal &journal){
 }
 
 
+//
+//Same idea as journalEntries(). I do a search by title more than a few times so this made is easier.
+//I return an iterator so It can be used in the function that needs it someplace else. Its really cool...
+//Ex: auto iter = entriesSearch(journal); ---- now iter can be used like it normally would be.
 vector<Entry>::const_iterator entriesSearch(Journal &journal, string userSearch){
+
+    //searched the journal entries from beginning to end and tries to match with a passed title string.
     auto f = find_if(journal.Entries.begin(), journal.Entries.end(),
             [=](const Entry &e){
                 {
@@ -63,9 +85,12 @@ vector<Entry>::const_iterator entriesSearch(Journal &journal, string userSearch)
                 }
             });
     cout << endl;
+
+    //if nothing returns true, there was no match.
     if (f == journal.Entries.end()){
         cout << "There are no entries with that title. Please try again." << endl;
     }
+    //returns the iterator
     else {
         return f;
     }
@@ -87,7 +112,7 @@ void read_Entry(Journal& journal)
     cout << "Please select entry by its title or type 'no' to exit." << endl;
     cin >> userSearch;
 
-    while(userSearch !="no")
+    while(userSearch !="quit")
     {
         //Calls a function that searches for title via lambda find_if
         auto f = entriesSearch(journal, userSearch);
