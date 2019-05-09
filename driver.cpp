@@ -115,10 +115,27 @@ void read_Entry(Journal& journal)
     while(userSearch !="quit")
     {
         //Calls a function that searches for title via lambda find_if
-        auto f = entriesSearch(journal, userSearch);
+        //searched the journal entries from beginning to end and tries to match with a passed title string.
+        auto f = find_if(journal.Entries.begin(), journal.Entries.end(),
+                [=](const Entry &e){
+                    {
+                        if (e.Title == userSearch)
+                            return true;
+                        else
+                            return false;
+                    }
+                });
+        cout << endl;
 
-        cout << "Log contents:" << endl;
-        cout << f->Log << endl << endl;
+        //if nothing returns true, there was no match.
+        if (f == journal.Entries.end()){
+            cout << "There are no entries with that title. Please try again." << endl;
+        }
+        //returns the iterator
+        else {
+            cout << "Log contents:" << endl;
+            cout << f->Log << endl << endl;
+        }
 
         //loops through entries and prints out their information.
         journalEntries(journal);
