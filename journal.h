@@ -91,18 +91,21 @@ class Journal
 
 };
 
-void menu_Screen(string userName);
+void menu_Screen(string user);
 
 void new_Entry(Journal& journal);
 
+void journalEntries(Journal &journal);
+
 void read_Entry(Journal &journal);
-//
-// edit_Entry();
-//
+
+vector<Entry> edit_Entry(Journal &journal);
+
+void delete_Entry(Journal &journal);
+
+
 // sort_Entries();
-//
-// delete_Entries();
-//
+
 // entry_Graveyard();
 
 
