@@ -47,7 +47,7 @@ vector<Entry>::const_iterator entriesSearch(Journal &journal, string userSearch)
 // //Looks at the vector to see the graveyard of deleted Entry to recover them.
 // vector<graveyard> entry_Graveyard(const vector<Entry>& entry)
 // {
-//
+////
 // }
 
 
@@ -55,7 +55,7 @@ int main(int argc, char*argv[]){
 
     string userName;
     cout << right;
-    cout /*<< setw(50) << "\t"*/ << "Please enter your name" << endl << endl << endl;
+    cout << setw(50) << "\t" << "Please enter your name" << endl << endl << endl;
     // cout << setw(60) << "\t";
     getline(cin, userName);
     // system("cls");
