@@ -16,7 +16,8 @@ void new_Entry(Journal &journal){
     cout << "Please end your inputs with a semicolon."<< endl << endl;
 
     cout << "Entry Title: ";
-    cin >> title;
+    getline(cin, title, '\n');
+    //cin >> title;
     if (title == "quit"){
         cout << "Journal entry cannot be named this. Please try again." << endl;
         new_Entry(journal);
@@ -26,13 +27,13 @@ void new_Entry(Journal &journal){
     }
 
     cout << "Date logged: ";
-    // getline(cin, date, ';');
-    cin >> date;
+    getline(cin, date, '\n');
+    // cin >> date;
     entry.Date = date;
 
     cout << "Time logged: ";
-    // getline(cin, time, ';');
-    cin >> time;
+    getline(cin, time, '\n');
+    // cin >> time;
     entry.Time = time;
 
     cout << "Enter your input please:" << endl;

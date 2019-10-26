@@ -16,7 +16,7 @@ void read_Entry(Journal& journal)
     cout << "Please select entry by its title or type 'no' to exit." << endl;
     cin >> userSearch;
 
-    while(userSearch !="quit")
+    while(userSearch !="q" || userSearch != "Q")
     {
         //Calls a function that searches for title via lambda find_if
         //searched the journal entries from beginning to end and tries to match with a passed title string.
@@ -37,15 +37,17 @@ void read_Entry(Journal& journal)
         }
         //returns the iterator
         else {
+            printf("\n\n\n\n");
             cout << "Log contents:" << endl;
             cout << f->Log << endl << endl;
+            printf("\n\n\n\n");
         }
 
         //loops through entries and prints out their information.
         journalEntries(journal);
 
         cout << endl;
-        cout << "Please select entry by its title or type 'no' to exit." << endl;
+        cout << "Please select entry by its title or type 'q' to exit." << endl;
         cout << "Which entry would you like to read?" << endl;
         cin >> userSearch;
     }

@@ -3,12 +3,17 @@
 
 void menu_Screen(string user){
 
+    /*The first two entries are here as place holders for testing
+      They are static journal objects that will be removed later.*/
     Entry entry2("first", "2/3/2018", "1400", "Hello there!");
     Entry entry3("second", "8/3/2019", "0200", "Goodbye!");
+
+    //Also a placeholder for testing journals.
     Journal journal("Personal Journal", "3/23/2019", "1844");
 
     journal.Entries.push_back(entry2);
     journal.Entries.push_back(entry3);
+
 
     // Journal journal;
     //Flush screen of Name text...
@@ -20,7 +25,7 @@ void menu_Screen(string user){
     //Flush Screen of welcome text.
 
 
-    cout << "Main Menu" << endl << endl;
+    cout << "Main Menu"  << endl;
     //Options to choose
     int choice;
     cout << "Please choose an option below" << endl;
@@ -31,7 +36,7 @@ void menu_Screen(string user){
     cout << "5. Sort Entry" << endl;
     cin >> choice;
 
-    while(choice != 0){
+    while(choice != 0 && choice <= 4){
 
         if (choice == 1){
             // entryIndex++;
